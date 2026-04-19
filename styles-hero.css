@@ -75,8 +75,9 @@
   color: var(--ink-soft);
   max-width: 48ch;
   margin: 0 0 32px;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
+.hero--stack .hero-sub { margin-inline: auto; }
 .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .hero-meta {
   margin-top: 28px;
