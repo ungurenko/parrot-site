@@ -190,8 +190,8 @@ function Hero({ variant }) {
             Аудио, видео и YouTube превращаются в текст. Прямо на вашем Mac.
           </div>
           <h1 className="hero-h1">
-            Parrot <em>превращает речь</em><br />
-            в текст.
+            Parrot превращает<br />
+            <em>речь в текст</em>.
           </h1>
           <p className="hero-sub">
             Загрузите файл или вставьте ссылку на YouTube.
