@@ -348,3 +348,91 @@
   .mock-body { grid-template-columns: 1fr; }
   .mock-sidebar { display: none; }
 }
+
+/* ---- Hero mobile (≤640px) ---- */
+@media (max-width: 640px) {
+  .hero { padding: 32px 0 56px; }
+  .hero::before {
+    width: 600px;
+    height: 600px;
+    top: -120px;
+    right: -220px;
+    filter: blur(48px);
+  }
+
+  .hero-grid { gap: 28px; }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    padding: 6px 10px 6px 8px;
+    gap: 8px;
+  }
+  .hero-eyebrow .ribbon { display: none; }
+
+  .hero-h1 {
+    font-size: clamp(40px, 10vw, 56px);
+    line-height: 1.0;
+    margin: 18px 0 16px;
+  }
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: none;
+    margin: 0 0 24px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+  .hero-meta { margin-top: 20px; font-size: 11.5px; }
+
+  /* App mockup — компактнее */
+  .mock-chrome { height: 32px; padding: 0 10px; gap: 8px; }
+  .mock-chrome .dot { width: 10px; height: 10px; }
+  .mock-title { font-size: 12px; gap: 6px; }
+  .mock-title img { width: 14px; height: 14px; }
+
+  .mock-body { min-height: 360px; }
+  .mock-main { padding: 12px 12px 14px; gap: 10px; }
+
+  .mock-tabs .tab {
+    padding: 6px 10px;
+    font-size: 12px;
+    min-height: 32px;
+  }
+
+  .mock-input {
+    padding: 10px 12px;
+    font-size: 12px;
+    gap: 8px;
+  }
+  .mock-input .mi-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .mock-status { padding: 10px 12px; }
+  .ms-row { flex-wrap: wrap; gap: 8px; }
+  .ms-status-label { font-size: 11.5px; white-space: normal; flex: 1 1 100%; }
+  .ms-status-meter { flex: 1 1 100%; }
+  .wave { height: 20px; }
+
+  .mock-transcript { padding: 12px; min-height: 120px; }
+  .mt-head { flex-wrap: wrap; gap: 6px; font-size: 10.5px; }
+  .mt-body { font-size: 13.5px; }
+  .mt-line { gap: 8px; }
+  .mt-ts { min-width: 36px; font-size: 10.5px; }
+}
+
+/* ---- Hero very narrow (≤380px) ---- */
+@media (max-width: 380px) {
+  .hero-h1 { font-size: clamp(36px, 11vw, 48px); }
+  .mock-body { min-height: 320px; }
+  .mock-main { padding: 10px 10px 12px; }
+}

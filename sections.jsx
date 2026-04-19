@@ -232,6 +232,35 @@ function Models() {
       spec: [["Скорость", 5], ["Качество", 4], ["Ресурс", 2]]
     }
   ];
+
+  const trackRef = React.useRef(null);
+  const [active, setActive] = React.useState(0);
+
+  const cardOffset = (t, i) => {
+    const card = t.children[i];
+    return card ? card.offsetLeft - t.offsetLeft : 0;
+  };
+
+  const onScroll = () => {
+    const t = trackRef.current;
+    if (!t) return;
+    const left = t.scrollLeft;
+    // найти ближайшую карточку к текущему scrollLeft
+    let best = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < models.length; i++) {
+      const d = Math.abs(cardOffset(t, i) - left);
+      if (d < bestDist) { bestDist = d; best = i; }
+    }
+    setActive(best);
+  };
+
+  const goTo = (i) => {
+    const t = trackRef.current;
+    if (!t) return;
+    t.scrollTo({ left: cardOffset(t, i), behavior: "smooth" });
+  };
+
   return (
     <section id="models" className="sec sec-models" style={{ "--accent": "var(--c-blue)" }}>
       <div className="container">
@@ -248,7 +277,7 @@ function Models() {
           </p>
         </div>
 
-        <div className="models-grid">
+        <div className="models-grid" ref={trackRef} onScroll={onScroll}>
           {models.map((m, i) => (
             <article className="model" key={i} style={{ "--accent": m.tagColor }}>
               <header className="model-head">
@@ -274,6 +303,20 @@ function Models() {
                 Скачать модель
               </button>
             </article>
+          ))}
+        </div>
+
+        <div className="models-dots" role="tablist" aria-label="Навигация по моделям">
+          {models.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`models-dot ${active === i ? "on" : ""}`}
+              aria-label={`Модель ${i + 1} из ${models.length}`}
+              aria-selected={active === i}
+              role="tab"
+              onClick={() => goTo(i)}
+            />
           ))}
         </div>
       </div>
