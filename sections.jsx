@@ -325,8 +325,16 @@ function Models() {
 }
 
 function FinalCTA() {
+  const command = "curl -fsSL https://raw.githubusercontent.com/ungurenko/parrot/main/install.sh | bash";
+  const [copied, setCopied] = React.useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(command).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    }).catch(() => {});
+  };
   return (
-    <section className="sec sec-cta">
+    <section className="sec sec-cta" id="install">
       <div className="container">
         <div className="cta-card">
           <div className="cta-ribbon">
@@ -344,13 +352,78 @@ function FinalCTA() {
             Бесплатно, работает локально на вашем Mac.
             Нужен Apple Silicon.
           </p>
-          <div className="cta-actions">
-            <a className="btn btn-primary" href={window.PARROT_DOWNLOAD || "#"}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.37 12.6c-.02-2.6 2.13-3.85 2.22-3.9-1.21-1.77-3.1-2.01-3.77-2.04-1.6-.16-3.13.95-3.95.95-.83 0-2.08-.92-3.42-.9-1.76.03-3.38 1.02-4.29 2.6-1.83 3.17-.47 7.87 1.32 10.45.87 1.26 1.9 2.68 3.25 2.63 1.31-.05 1.8-.85 3.39-.85 1.58 0 2.03.85 3.41.82 1.41-.02 2.3-1.28 3.16-2.55.99-1.46 1.4-2.87 1.42-2.94-.03-.01-2.72-1.04-2.74-4.14z"/></svg>
-              Скачать для macOS
-            </a>
-            <span className="cta-meta">Apple Silicon · macOS 13+</span>
+
+          <div className="install-tabs">
+            <div className="install-tab install-tab--primary">
+              <div className="install-tab-head">
+                <h3>⌨ Установка в Terminal</h3>
+                <span className="install-tab-badge">Рекомендуется</span>
+              </div>
+              <p>Одна команда - Parrot установится и откроется сам. macOS ничего не спросит.</p>
+              <div className="install-code" onClick={handleCopy}>
+                <span className="install-prompt">$</span>
+                <code>{command}</code>
+                <button
+                  type="button"
+                  className={`install-copy${copied ? " copied" : ""}`}
+                  onClick={(e) => { e.stopPropagation(); handleCopy(); }}
+                  aria-label="Скопировать команду"
+                >
+                  {copied ? "✓ Скопировано" : "Скопировать"}
+                </button>
+              </div>
+              <div className="install-meta">~15 секунд · 72 МБ · без прав администратора</div>
+
+              <div className="install-steps">
+                <div className="install-steps-title">Если раньше не работали с Terminal</div>
+                <div className="install-step">
+                  <span className="install-step-num">1</span>
+                  <div className="install-step-body">
+                    <div className="install-step-title">Скопируйте команду выше</div>
+                    <p>Нажмите кнопку <b>«Скопировать»</b> - она подсветится зелёным.</p>
+                  </div>
+                </div>
+                <div className="install-step">
+                  <span className="install-step-num">2</span>
+                  <div className="install-step-body">
+                    <div className="install-step-title">Откройте Terminal</div>
+                    <p>
+                      Нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span>, напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>. Откроется окно с мигающим курсором.
+                    </p>
+                  </div>
+                </div>
+                <div className="install-step">
+                  <span className="install-step-num">3</span>
+                  <div className="install-step-body">
+                    <div className="install-step-title">Вставьте и запустите</div>
+                    <p>
+                      В окне Terminal нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>V</kbd></span>, затем <kbd>Enter</kbd>. Через 15–30 секунд Parrot откроется сам.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="install-or">или</div>
+
+            <div className="install-tab install-tab--compact">
+              <div className="install-tab-head">
+                <h3>💿 Скачать DMG</h3>
+              </div>
+              <p>Классический установщик - перетащите Parrot в папку «Программы».</p>
+              <a className="btn btn-ghost" href={window.PARROT_DOWNLOAD || "#"} style={{alignSelf: "flex-start"}}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Parrot.dmg
+              </a>
+              <details className="install-note">
+                <summary>Если macOS заблокирует первый запуск</summary>
+                <p>Откройте Terminal и выполните:</p>
+                <code>xattr -cr /Applications/Parrot.app</code>
+              </details>
+            </div>
           </div>
+
+          <span className="cta-meta">Apple Silicon · macOS 13+</span>
         </div>
       </div>
     </section>

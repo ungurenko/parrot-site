@@ -436,3 +436,12 @@
   .mock-body { min-height: 320px; }
   .mock-main { padding: 10px 10px 12px; }
 }
+
+/* ---- Hero install hint ---- */
+.hero-install-hint { margin-top: 14px; font-size: 13.5px; color: var(--ink-mute); }
+.hero-install-hint a {
+  color: var(--ink); text-decoration: underline;
+  text-decoration-color: var(--line-strong); text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s;
+}
+.hero-install-hint a:hover { text-decoration-color: var(--ink); }

@@ -212,6 +212,9 @@ function Hero({ variant }) {
             <span className="dot-mono">●</span>
             Для Mac с Apple Silicon: M1, M2, M3 или новее.
           </div>
+          <div className="hero-install-hint">
+            Или установите <a href="#install">одной командой в Terminal</a> - без предупреждений macOS.
+          </div>
         </div>
 
         <div className="hero-mock">
