@@ -1087,9 +1087,7 @@ section { padding: 112px 0; position: relative; }
   position: relative; min-width: 0;
 }
 .install-tab--primary { border-color: var(--ink); box-shadow: 0 0 0 2px var(--ink) inset; }
-.install-tab--compact { padding: 22px 32px; }
-.install-tab--compact > .install-tab-head { margin-bottom: 2px; }
-.install-tab--compact > p { margin: 4px 0 14px; }
+.install-tabs--single { max-width: 760px; }
 .install-tab-head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 6px; gap: 12px; flex-wrap: wrap;
@@ -1162,31 +1160,104 @@ section { padding: 112px 0; position: relative; }
   display: inline-flex; align-items: center; line-height: 1.2;
   min-height: 18px; box-sizing: border-box;
 }
-.install-or {
-  align-self: center; font-family: var(--font-mono); font-size: 11px;
-  letter-spacing: 0.14em; color: var(--ink-mute); text-transform: uppercase;
-  padding: 4px 16px;
-  display: inline-flex; align-items: center; gap: 12px;
+.install-step-hint {
+  font-size: 12.5px; line-height: 1.5; color: var(--ink-mute); margin: 6px 0 0 !important;
 }
-.install-or::before,
-.install-or::after {
-  content: ""; width: 40px; height: 1px; background: var(--line-strong);
+.install-prompt-inline {
+  font-family: var(--font-mono); color: #F56A3C; font-weight: 600;
+  margin-right: 6px; user-select: none;
 }
-.install-note { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
-.install-note summary {
-  cursor: pointer; color: var(--ink-soft); font-size: 13px;
-  padding: 4px 0; list-style: none;
+.install-help {
+  margin-top: 22px; padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+  font-size: 13.5px; color: var(--ink-mute); text-align: center;
 }
-.install-note summary::-webkit-details-marker { display: none; }
-.install-note summary::before {
-  content: "▸"; color: var(--ink-mute); display: inline-block; margin-right: 6px;
+.install-help a { color: var(--accent); font-weight: 500; }
+.install-help a:hover { text-decoration: underline; }
+
+/* ---- FAQ ---- */
+.sec-faq { padding: 96px 0 104px; }
+.sec-faq-lead {
+  font-size: 16px; line-height: 1.55; color: var(--ink-soft);
+  max-width: 60ch; margin: 18px 0 36px;
 }
-.install-note[open] summary::before { content: "▾"; }
-.install-note p { font-size: 13px; margin: 8px 0 6px; color: var(--ink-soft); }
-.install-note code {
-  display: inline-block; font-family: var(--font-mono); font-size: 12px;
-  background: var(--bg-warm); padding: 4px 8px; border-radius: 6px; color: var(--ink);
+.sec-faq-lead a { color: var(--accent); font-weight: 500; }
+.sec-faq-lead a:hover { text-decoration: underline; }
+.faq-list {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 760px;
+  border-top: 1px solid var(--line-strong);
 }
+.faq-item { border-bottom: 1px solid var(--line-strong); }
+.faq-q {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; padding: 22px 4px;
+  font-size: 17px; line-height: 1.4; font-weight: 500; color: var(--ink);
+  letter-spacing: -0.005em;
+  transition: color .15s ease;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q:hover { color: var(--accent); }
+.faq-q-text { flex: 1; min-width: 0; }
+.faq-q-icon {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent); font-size: 18px; font-weight: 400; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+  transition: transform .2s ease, background .2s ease;
+}
+.faq-item[open] .faq-q-icon {
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.faq-item[open] .faq-q { color: var(--accent); }
+.faq-a {
+  padding: 0 4px 24px; max-width: 64ch;
+  font-size: 14.5px; line-height: 1.65; color: var(--ink-soft);
+}
+.faq-a p { margin: 0 0 10px; }
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-a b { color: var(--ink); font-weight: 600; }
+.faq-a a {
+  color: var(--accent); font-weight: 500;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.faq-a a:hover { border-bottom-color: var(--accent); }
+.faq-a code {
+  font-family: var(--font-mono); font-size: 12.5px;
+  background: var(--bg-warm); padding: 2px 7px; border-radius: 5px;
+  color: var(--ink);
+}
+.faq-a .kbd-combo kbd,
+.faq-a kbd {
+  font-family: var(--font-mono); font-size: 11px; background: #fff;
+  border: 1px solid var(--line-strong); border-bottom-width: 2px;
+  border-radius: 5px; padding: 2px 7px; color: var(--ink);
+  display: inline-flex; align-items: center; line-height: 1.2;
+  min-height: 18px; box-sizing: border-box;
+}
+.faq-code {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-ink); color: #F3EFE6;
+  border-radius: 10px; padding: 12px 14px; margin: 10px 0;
+  font-family: var(--font-mono); font-size: 12.5px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.faq-code::-webkit-scrollbar { display: none; }
+.faq-code code {
+  background: transparent; color: #F3EFE6; padding: 0;
+  white-space: nowrap; font-family: inherit;
+}
+.faq-code .install-prompt-inline { color: #F56A3C; }
+@media (max-width: 640px) {
+  .sec-faq { padding: 72px 0 80px; }
+  .faq-q { font-size: 15.5px; padding: 18px 2px; gap: 14px; }
+  .faq-q-icon { width: 24px; height: 24px; font-size: 16px; }
+  .faq-a { font-size: 14px; padding: 0 2px 20px; }
+}
+
 .hero-install-hint { margin-top: 14px; font-size: 13.5px; color: var(--ink-mute); }
 .hero-install-hint a {
   color: var(--ink); text-decoration: underline;
@@ -1240,7 +1311,6 @@ section { padding: 112px 0; position: relative; }
   .feature-grid { grid-template-columns: 1fr; }
   .sec-head { grid-template-columns: 1fr; gap: 24px; }
   .install-tab { padding: 24px 24px 22px; }
-  .install-tab--compact { padding: 20px 24px; }
 }
 /* ---- Models carousel (mobile / tablet) ---- */
 @media (max-width: 780px) {
@@ -1592,9 +1662,9 @@ function Hero({ variant }) {
             без отправки в облако.
           </p>
           <div className="hero-actions">
-            <a className="btn btn-primary" href={window.PARROT_DOWNLOAD || "#"}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-              Скачать для macOS
+            <a className="btn btn-primary" href="#install">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              Установить через Терминал
             </a>
             <a className="btn btn-ghost" href="#how">
               Как это работает
@@ -1603,10 +1673,10 @@ function Hero({ variant }) {
           </div>
           <div className="hero-meta">
             <span className="dot-mono">●</span>
-            Для Mac с Apple Silicon: M1, M2, M3 или новее.
+            Для Mac с Apple Silicon: M1, M2, M3 или новее. macOS 12+.
           </div>
           <div className="hero-install-hint">
-            Или установите <a href="#install">одной командой в Terminal</a> - без предупреждений macOS.
+            Одна команда — и Parrot установится сам. <a href="#faq">Никогда не открывали Терминал?</a>
           </div>
         </div>
 
@@ -1947,6 +2017,92 @@ function Models() {
   );
 }
 
+function FAQ() {
+  const items = [
+    {
+      q: "Что такое Терминал и где его взять?",
+      a: <>
+        <p>Терминал — это стандартное приложение macOS, оно уже есть на вашем Mac. Устанавливать ничего не нужно.</p>
+        <p>Откройте его так: нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span>, напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>. Появится тёмное окно с мигающим курсором — это и есть Терминал.</p>
+      </>
+    },
+    {
+      q: "Безопасно ли вставлять команду из интернета?",
+      a: <>
+        <p>Скрипт установки <code>install.sh</code> открыт на GitHub — его можно прочитать построчно перед запуском.</p>
+        <p>Он не запрашивает пароль администратора и не лезет в системные папки. Установка идёт только в <code>/Applications</code> — туда же, куда любое обычное приложение для Mac.</p>
+        <p><a href="https://github.com/ungurenko/parrot/blob/main/install.sh" target="_blank" rel="noopener">Посмотреть код установщика на GitHub →</a></p>
+      </>
+    },
+    {
+      q: "macOS пишет «файл повреждён» или блокирует запуск",
+      a: <>
+        <p>Это срабатывает Gatekeeper — защита macOS от неподписанных приложений. Решение в одну команду:</p>
+        <div className="faq-code"><span className="install-prompt-inline">$</span><code>xattr -cr /Applications/Parrot.app</code></div>
+        <p>Скопируйте, вставьте в Терминал, нажмите <kbd>Enter</kbd>. После этого Parrot откроется как обычно. Можно также просто запустить установочную команду заново — она перепишет атрибуты сама.</p>
+      </>
+    },
+    {
+      q: "Терминал пишет command not found или ничего не происходит",
+      a: <>
+        <p>Чаще всего — потеряны пробелы в команде при ручном выделении. Используйте кнопку <b>«Скопировать»</b> в блоке установки, она копирует команду целиком и без искажений.</p>
+        <p>Если кнопка скопировала, но команда всё равно не запускается — проверьте интернет и попробуйте ещё раз.</p>
+      </>
+    },
+    {
+      q: "Куда установится Parrot и как его удалить?",
+      a: <>
+        <p>Parrot ставится в <code>/Applications/Parrot.app</code> — стандартная папка «Программы». Иконка появится там и в Launchpad.</p>
+        <p>Удалить — перетащите иконку Parrot в Корзину, как любое приложение Mac. Никаких следов в системе не остаётся.</p>
+      </>
+    },
+    {
+      q: "Нужны ли права администратора или пароль?",
+      a: <p>Нет. Скрипт работает только в пользовательских папках, пароль <b>sudo</b> не запрашивается ни на одном шаге. Если что-то требует у вас пароль — это не Parrot.</p>
+    },
+    {
+      q: "Какая macOS поддерживается? M1/M2/M3/M4 или Intel?",
+      a: <>
+        <p>macOS 12 Monterey и новее. Parrot работает на Apple Silicon — это любой Mac на чипах серии M (M1, M2, M3, M4 и новее).</p>
+        <p>На Intel-маках Parrot пока не запускается — модели распознавания речи требуют Neural Engine от Apple Silicon.</p>
+      </>
+    },
+    {
+      q: "Как обновить Parrot до новой версии?",
+      a: <p>Запустите ту же команду установки заново — она поставит свежую версию поверх старой. Ваши записи и настройки останутся на месте.</p>
+    },
+    {
+      q: "Где хранятся мои записи и расшифровки?",
+      a: <>
+        <p>Всё локально — на вашем Mac. Parrot не отправляет аудио, видео или текст в облако, не использует чужие серверы и не требует подключения к интернету для работы (после установки).</p>
+        <p>Подробности — в секции <a href="#privacy">Приватность</a>.</p>
+      </>
+    },
+  ];
+
+  return (
+    <section id="faq" className="sec sec-faq" style={{ "--accent": "var(--c-purple)" }}>
+      <div className="container">
+        <div className="eyebrow"><span className="dot" /> Вопрос — ответ</div>
+        <h2 className="section-kicker">Если что-то <em>смущает</em> — здесь ответы.</h2>
+        <p className="sec-faq-lead">Восемь самых частых сомнений и ошибок. Если не нашли своё — напишите в <a href="https://github.com/ungurenko/parrot/issues" target="_blank" rel="noopener">issues на GitHub</a>.</p>
+
+        <div className="faq-list">
+          {items.map((item, i) => (
+            <details className="faq-item" key={i}>
+              <summary className="faq-q">
+                <span className="faq-q-text">{item.q}</span>
+                <span className="faq-q-icon" aria-hidden="true">+</span>
+              </summary>
+              <div className="faq-a">{item.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FinalCTA() {
   const command = "curl -fsSL https://raw.githubusercontent.com/ungurenko/parrot/main/install.sh | bash";
   const [copied, setCopied] = React.useState(false);
@@ -1976,13 +2132,13 @@ function FinalCTA() {
             Нужен Apple Silicon.
           </p>
 
-          <div className="install-tabs">
+          <div className="install-tabs install-tabs--single">
             <div className="install-tab install-tab--primary">
               <div className="install-tab-head">
-                <h3>⌨ Установка в Terminal</h3>
-                <span className="install-tab-badge">Рекомендуется</span>
+                <h3>⌨ Установка в Терминале</h3>
+                <span className="install-tab-badge">Единственный способ</span>
               </div>
-              <p>Одна команда - Parrot установится и откроется сам. macOS ничего не спросит.</p>
+              <p>Одна команда — Parrot скачается, установится и откроется сам. macOS не задаст ни одного вопроса.</p>
               <div className="install-code" onClick={handleCopy}>
                 <span className="install-prompt">$</span>
                 <code>{command}</code>
@@ -1998,62 +2154,57 @@ function FinalCTA() {
               <div className="install-meta">~15 секунд · 72 МБ · без прав администратора</div>
 
               <div className="install-steps">
-                <div className="install-steps-title">Если раньше не работали с Terminal</div>
+                <div className="install-steps-title">Никогда не открывали Терминал? Это четыре шага.</div>
                 <div className="install-step">
                   <span className="install-step-num">1</span>
                   <div className="install-step-body">
                     <div className="install-step-title">Скопируйте команду выше</div>
-                    <p>Нажмите кнопку <b>«Скопировать»</b> - она подсветится зелёным.</p>
+                    <p>Нажмите кнопку <b>«Скопировать»</b> — она подсветится зелёным и покажет ✓. Команда уже в буфере обмена.</p>
                   </div>
                 </div>
                 <div className="install-step">
                   <span className="install-step-num">2</span>
                   <div className="install-step-body">
-                    <div className="install-step-title">Откройте Terminal</div>
+                    <div className="install-step-title">Откройте Терминал</div>
                     <p>
-                      Нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span>, напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>. Откроется окно с мигающим курсором.
+                      Нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span> — это вызов поиска Spotlight. Напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>.
                     </p>
+                    <p className="install-step-hint">Терминал — стандартное приложение macOS. Устанавливать ничего не нужно, оно уже есть на вашем Mac.</p>
                   </div>
                 </div>
                 <div className="install-step">
                   <span className="install-step-num">3</span>
                   <div className="install-step-body">
-                    <div className="install-step-title">Вставьте и запустите</div>
+                    <div className="install-step-title">Вставьте команду и нажмите Enter</div>
                     <p>
-                      В окне Terminal нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>V</kbd></span>, затем <kbd>Enter</kbd>. Через 15–30 секунд Parrot откроется сам.
+                      В окне Терминала нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>V</kbd></span> — команда появится после знака <code className="install-prompt-inline">$</code>. Затем нажмите <kbd>Enter</kbd>.
                     </p>
+                    <p className="install-step-hint">Появятся строки «Скачивание…», «Установка…», «Готово». Это нормально — так и должно быть.</p>
+                  </div>
+                </div>
+                <div className="install-step">
+                  <span className="install-step-num">4</span>
+                  <div className="install-step-body">
+                    <div className="install-step-title">Parrot откроется сам</div>
+                    <p>Через 15–30 секунд иконка Parrot появится в папке <b>«Программы»</b>, а само приложение запустится. Можно закрывать Терминал.</p>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="install-or">или</div>
-
-            <div className="install-tab install-tab--compact">
-              <div className="install-tab-head">
-                <h3>💿 Скачать DMG</h3>
+              <div className="install-help">
+                Что-то пошло не так? <a href="#faq">Ответы на частые вопросы →</a>
               </div>
-              <p>Классический установщик - перетащите Parrot в папку «Программы».</p>
-              <a className="btn btn-ghost" href={window.PARROT_DOWNLOAD || "#"} style={{alignSelf: "flex-start"}}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Parrot.dmg
-              </a>
-              <details className="install-note">
-                <summary>Если macOS заблокирует первый запуск</summary>
-                <p>Откройте Terminal и выполните:</p>
-                <code>xattr -cr /Applications/Parrot.app</code>
-              </details>
             </div>
           </div>
 
-          <span className="cta-meta">Apple Silicon · macOS 13+</span>
+          <span className="cta-meta">Apple Silicon · macOS 12+</span>
         </div>
       </div>
     </section>
   );
 }
 
-Object.assign(window, { FeatureRow, HowItWorks, Privacy, Models, FinalCTA });
+Object.assign(window, { FeatureRow, HowItWorks, Privacy, Models, FAQ, FinalCTA });
 
 /* Main app — assembles everything, tweaks panel, edit-mode host protocol */
 
@@ -2111,6 +2262,7 @@ function App() {
       <HowItWorks />
       <Privacy />
       <Models />
+      <FAQ />
       <FinalCTA />
       <Footer />
       <StickyCTA />
@@ -2133,12 +2285,12 @@ function Nav() {
           <a href="#how">Как работает</a>
           <a href="#privacy">Приватность</a>
           <a href="#models">Модели</a>
-          <a href="#privacy">Оффлайн</a>
+          <a href="#faq">Вопросы</a>
         </nav>
-        <a className="nav-cta" href={window.PARROT_DOWNLOAD || "#"} aria-label="Скачать Parrot для macOS">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-          <span className="nav-cta-label-full">Скачать</span>
-          <span className="nav-cta-label-short">Mac</span>
+        <a className="nav-cta" href="#install" aria-label="Установить Parrot через Терминал">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span className="nav-cta-label-full">Установить</span>
+          <span className="nav-cta-label-short">Install</span>
         </a>
       </div>
     </header>
@@ -2196,9 +2348,9 @@ function StickyCTA() {
 
   return (
     <div className={`sticky-cta ${visible ? "is-visible" : ""}`} aria-hidden={!visible}>
-      <a className="btn btn-primary" href={window.PARROT_DOWNLOAD || "#"} tabIndex={visible ? 0 : -1}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-        Скачать для macOS
+      <a className="btn btn-primary" href="#install" tabIndex={visible ? 0 : -1}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Установить за 15 секунд
       </a>
     </div>
   );
@@ -2252,8 +2404,6 @@ function TweaksPanel({ tweaks, update }) {
     </div>
   );
 }
-
-window.PARROT_DOWNLOAD = "https://github.com/ungurenko/parrot/releases/latest/download/Parrot.dmg";
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 

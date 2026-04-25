@@ -324,6 +324,92 @@ function Models() {
   );
 }
 
+function FAQ() {
+  const items = [
+    {
+      q: "Что такое Терминал и где его взять?",
+      a: <>
+        <p>Терминал — это стандартное приложение macOS, оно уже есть на вашем Mac. Устанавливать ничего не нужно.</p>
+        <p>Откройте его так: нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span>, напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>. Появится тёмное окно с мигающим курсором — это и есть Терминал.</p>
+      </>
+    },
+    {
+      q: "Безопасно ли вставлять команду из интернета?",
+      a: <>
+        <p>Скрипт установки <code>install.sh</code> открыт на GitHub — его можно прочитать построчно перед запуском.</p>
+        <p>Он не запрашивает пароль администратора и не лезет в системные папки. Установка идёт только в <code>/Applications</code> — туда же, куда любое обычное приложение для Mac.</p>
+        <p><a href="https://github.com/ungurenko/parrot/blob/main/install.sh" target="_blank" rel="noopener">Посмотреть код установщика на GitHub →</a></p>
+      </>
+    },
+    {
+      q: "macOS пишет «файл повреждён» или блокирует запуск",
+      a: <>
+        <p>Это срабатывает Gatekeeper — защита macOS от неподписанных приложений. Решение в одну команду:</p>
+        <div className="faq-code"><span className="install-prompt-inline">$</span><code>xattr -cr /Applications/Parrot.app</code></div>
+        <p>Скопируйте, вставьте в Терминал, нажмите <kbd>Enter</kbd>. После этого Parrot откроется как обычно. Можно также просто запустить установочную команду заново — она перепишет атрибуты сама.</p>
+      </>
+    },
+    {
+      q: "Терминал пишет command not found или ничего не происходит",
+      a: <>
+        <p>Чаще всего — потеряны пробелы в команде при ручном выделении. Используйте кнопку <b>«Скопировать»</b> в блоке установки, она копирует команду целиком и без искажений.</p>
+        <p>Если кнопка скопировала, но команда всё равно не запускается — проверьте интернет и попробуйте ещё раз.</p>
+      </>
+    },
+    {
+      q: "Куда установится Parrot и как его удалить?",
+      a: <>
+        <p>Parrot ставится в <code>/Applications/Parrot.app</code> — стандартная папка «Программы». Иконка появится там и в Launchpad.</p>
+        <p>Удалить — перетащите иконку Parrot в Корзину, как любое приложение Mac. Никаких следов в системе не остаётся.</p>
+      </>
+    },
+    {
+      q: "Нужны ли права администратора или пароль?",
+      a: <p>Нет. Скрипт работает только в пользовательских папках, пароль <b>sudo</b> не запрашивается ни на одном шаге. Если что-то требует у вас пароль — это не Parrot.</p>
+    },
+    {
+      q: "Какая macOS поддерживается? M1/M2/M3/M4 или Intel?",
+      a: <>
+        <p>macOS 12 Monterey и новее. Parrot работает на Apple Silicon — это любой Mac на чипах серии M (M1, M2, M3, M4 и новее).</p>
+        <p>На Intel-маках Parrot пока не запускается — модели распознавания речи требуют Neural Engine от Apple Silicon.</p>
+      </>
+    },
+    {
+      q: "Как обновить Parrot до новой версии?",
+      a: <p>Запустите ту же команду установки заново — она поставит свежую версию поверх старой. Ваши записи и настройки останутся на месте.</p>
+    },
+    {
+      q: "Где хранятся мои записи и расшифровки?",
+      a: <>
+        <p>Всё локально — на вашем Mac. Parrot не отправляет аудио, видео или текст в облако, не использует чужие серверы и не требует подключения к интернету для работы (после установки).</p>
+        <p>Подробности — в секции <a href="#privacy">Приватность</a>.</p>
+      </>
+    },
+  ];
+
+  return (
+    <section id="faq" className="sec sec-faq" style={{ "--accent": "var(--c-purple)" }}>
+      <div className="container">
+        <div className="eyebrow"><span className="dot" /> Вопрос — ответ</div>
+        <h2 className="section-kicker">Если что-то <em>смущает</em> — здесь ответы.</h2>
+        <p className="sec-faq-lead">Восемь самых частых сомнений и ошибок. Если не нашли своё — напишите в <a href="https://github.com/ungurenko/parrot/issues" target="_blank" rel="noopener">issues на GitHub</a>.</p>
+
+        <div className="faq-list">
+          {items.map((item, i) => (
+            <details className="faq-item" key={i}>
+              <summary className="faq-q">
+                <span className="faq-q-text">{item.q}</span>
+                <span className="faq-q-icon" aria-hidden="true">+</span>
+              </summary>
+              <div className="faq-a">{item.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FinalCTA() {
   const command = "curl -fsSL https://raw.githubusercontent.com/ungurenko/parrot/main/install.sh | bash";
   const [copied, setCopied] = React.useState(false);
@@ -353,13 +439,13 @@ function FinalCTA() {
             Нужен Apple Silicon.
           </p>
 
-          <div className="install-tabs">
+          <div className="install-tabs install-tabs--single">
             <div className="install-tab install-tab--primary">
               <div className="install-tab-head">
-                <h3>⌨ Установка в Terminal</h3>
-                <span className="install-tab-badge">Рекомендуется</span>
+                <h3>⌨ Установка в Терминале</h3>
+                <span className="install-tab-badge">Единственный способ</span>
               </div>
-              <p>Одна команда - Parrot установится и откроется сам. macOS ничего не спросит.</p>
+              <p>Одна команда — Parrot скачается, установится и откроется сам. macOS не задаст ни одного вопроса.</p>
               <div className="install-code" onClick={handleCopy}>
                 <span className="install-prompt">$</span>
                 <code>{command}</code>
@@ -375,59 +461,54 @@ function FinalCTA() {
               <div className="install-meta">~15 секунд · 72 МБ · без прав администратора</div>
 
               <div className="install-steps">
-                <div className="install-steps-title">Если раньше не работали с Terminal</div>
+                <div className="install-steps-title">Никогда не открывали Терминал? Это четыре шага.</div>
                 <div className="install-step">
                   <span className="install-step-num">1</span>
                   <div className="install-step-body">
                     <div className="install-step-title">Скопируйте команду выше</div>
-                    <p>Нажмите кнопку <b>«Скопировать»</b> - она подсветится зелёным.</p>
+                    <p>Нажмите кнопку <b>«Скопировать»</b> — она подсветится зелёным и покажет ✓. Команда уже в буфере обмена.</p>
                   </div>
                 </div>
                 <div className="install-step">
                   <span className="install-step-num">2</span>
                   <div className="install-step-body">
-                    <div className="install-step-title">Откройте Terminal</div>
+                    <div className="install-step-title">Откройте Терминал</div>
                     <p>
-                      Нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span>, напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>. Откроется окно с мигающим курсором.
+                      Нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>Space</kbd></span> — это вызов поиска Spotlight. Напечатайте <b>Терминал</b> и нажмите <kbd>Enter</kbd>.
                     </p>
+                    <p className="install-step-hint">Терминал — стандартное приложение macOS. Устанавливать ничего не нужно, оно уже есть на вашем Mac.</p>
                   </div>
                 </div>
                 <div className="install-step">
                   <span className="install-step-num">3</span>
                   <div className="install-step-body">
-                    <div className="install-step-title">Вставьте и запустите</div>
+                    <div className="install-step-title">Вставьте команду и нажмите Enter</div>
                     <p>
-                      В окне Terminal нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>V</kbd></span>, затем <kbd>Enter</kbd>. Через 15–30 секунд Parrot откроется сам.
+                      В окне Терминала нажмите <span className="kbd-combo"><kbd>⌘</kbd><kbd>V</kbd></span> — команда появится после знака <code className="install-prompt-inline">$</code>. Затем нажмите <kbd>Enter</kbd>.
                     </p>
+                    <p className="install-step-hint">Появятся строки «Скачивание…», «Установка…», «Готово». Это нормально — так и должно быть.</p>
+                  </div>
+                </div>
+                <div className="install-step">
+                  <span className="install-step-num">4</span>
+                  <div className="install-step-body">
+                    <div className="install-step-title">Parrot откроется сам</div>
+                    <p>Через 15–30 секунд иконка Parrot появится в папке <b>«Программы»</b>, а само приложение запустится. Можно закрывать Терминал.</p>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="install-or">или</div>
-
-            <div className="install-tab install-tab--compact">
-              <div className="install-tab-head">
-                <h3>💿 Скачать DMG</h3>
+              <div className="install-help">
+                Что-то пошло не так? <a href="#faq">Ответы на частые вопросы →</a>
               </div>
-              <p>Классический установщик - перетащите Parrot в папку «Программы».</p>
-              <a className="btn btn-ghost" href={window.PARROT_DOWNLOAD || "#"} style={{alignSelf: "flex-start"}}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Parrot.dmg
-              </a>
-              <details className="install-note">
-                <summary>Если macOS заблокирует первый запуск</summary>
-                <p>Откройте Terminal и выполните:</p>
-                <code>xattr -cr /Applications/Parrot.app</code>
-              </details>
             </div>
           </div>
 
-          <span className="cta-meta">Apple Silicon · macOS 13+</span>
+          <span className="cta-meta">Apple Silicon · macOS 12+</span>
         </div>
       </div>
     </section>
   );
 }
 
-Object.assign(window, { FeatureRow, HowItWorks, Privacy, Models, FinalCTA });
+Object.assign(window, { FeatureRow, HowItWorks, Privacy, Models, FAQ, FinalCTA });

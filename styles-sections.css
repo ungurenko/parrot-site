@@ -551,9 +551,7 @@
   position: relative; min-width: 0;
 }
 .install-tab--primary { border-color: var(--ink); box-shadow: 0 0 0 2px var(--ink) inset; }
-.install-tab--compact { padding: 22px 32px; }
-.install-tab--compact > .install-tab-head { margin-bottom: 2px; }
-.install-tab--compact > p { margin: 4px 0 14px; }
+.install-tabs--single { max-width: 760px; }
 .install-tab-head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 6px; gap: 12px; flex-wrap: wrap;
@@ -626,34 +624,108 @@
   display: inline-flex; align-items: center; line-height: 1.2;
   min-height: 18px; box-sizing: border-box;
 }
-.install-or {
-  align-self: center; font-family: var(--font-mono); font-size: 11px;
-  letter-spacing: 0.14em; color: var(--ink-mute); text-transform: uppercase;
-  padding: 4px 16px;
-  display: inline-flex; align-items: center; gap: 12px;
+.install-step-hint {
+  font-size: 12.5px; line-height: 1.5; color: var(--ink-mute); margin: 6px 0 0 !important;
 }
-.install-or::before,
-.install-or::after {
-  content: ""; width: 40px; height: 1px; background: var(--line-strong);
+.install-prompt-inline {
+  font-family: var(--font-mono); color: #F56A3C; font-weight: 600;
+  margin-right: 6px; user-select: none;
 }
-.install-note { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
-.install-note summary {
-  cursor: pointer; color: var(--ink-soft); font-size: 13px;
-  padding: 4px 0; list-style: none;
+.install-help {
+  margin-top: 22px; padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+  font-size: 13.5px; color: var(--ink-mute); text-align: center;
 }
-.install-note summary::-webkit-details-marker { display: none; }
-.install-note summary::before {
-  content: "▸"; color: var(--ink-mute); display: inline-block; margin-right: 6px;
-}
-.install-note[open] summary::before { content: "▾"; }
-.install-note p { font-size: 13px; margin: 8px 0 6px; color: var(--ink-soft); }
-.install-note code {
-  display: inline-block; font-family: var(--font-mono); font-size: 12px;
-  background: var(--bg-warm); padding: 4px 8px; border-radius: 6px; color: var(--ink);
-}
+.install-help a { color: var(--accent); font-weight: 500; }
+.install-help a:hover { text-decoration: underline; }
 
 /* Install — narrower screens */
 @media (max-width: 1080px) {
   .install-tab { padding: 24px 24px 22px; }
-  .install-tab--compact { padding: 20px 24px; }
+}
+
+/* ---- FAQ ---- */
+.sec-faq { padding: 96px 0 104px; }
+.sec-faq-lead {
+  font-size: 16px; line-height: 1.55; color: var(--ink-soft);
+  max-width: 60ch; margin: 18px 0 36px;
+}
+.sec-faq-lead a { color: var(--accent); font-weight: 500; }
+.sec-faq-lead a:hover { text-decoration: underline; }
+.faq-list {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 760px;
+  border-top: 1px solid var(--line-strong);
+}
+.faq-item {
+  border-bottom: 1px solid var(--line-strong);
+}
+.faq-q {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; padding: 22px 4px;
+  font-size: 17px; line-height: 1.4; font-weight: 500; color: var(--ink);
+  letter-spacing: -0.005em;
+  transition: color .15s ease;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q:hover { color: var(--accent); }
+.faq-q-text { flex: 1; min-width: 0; }
+.faq-q-icon {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent); font-size: 18px; font-weight: 400; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+  transition: transform .2s ease, background .2s ease;
+}
+.faq-item[open] .faq-q-icon {
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.faq-item[open] .faq-q { color: var(--accent); }
+.faq-a {
+  padding: 0 4px 24px; max-width: 64ch;
+  font-size: 14.5px; line-height: 1.65; color: var(--ink-soft);
+}
+.faq-a p { margin: 0 0 10px; }
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-a b { color: var(--ink); font-weight: 600; }
+.faq-a a {
+  color: var(--accent); font-weight: 500;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.faq-a a:hover { border-bottom-color: var(--accent); }
+.faq-a code {
+  font-family: var(--font-mono); font-size: 12.5px;
+  background: var(--bg-warm); padding: 2px 7px; border-radius: 5px;
+  color: var(--ink);
+}
+.faq-a .kbd-combo kbd,
+.faq-a kbd {
+  font-family: var(--font-mono); font-size: 11px; background: #fff;
+  border: 1px solid var(--line-strong); border-bottom-width: 2px;
+  border-radius: 5px; padding: 2px 7px; color: var(--ink);
+  display: inline-flex; align-items: center; line-height: 1.2;
+  min-height: 18px; box-sizing: border-box;
+}
+.faq-code {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-ink); color: #F3EFE6;
+  border-radius: 10px; padding: 12px 14px; margin: 10px 0;
+  font-family: var(--font-mono); font-size: 12.5px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.faq-code::-webkit-scrollbar { display: none; }
+.faq-code code {
+  background: transparent; color: #F3EFE6; padding: 0;
+  white-space: nowrap; font-family: inherit;
+}
+.faq-code .install-prompt-inline { color: #F56A3C; }
+
+@media (max-width: 640px) {
+  .sec-faq { padding: 72px 0 80px; }
+  .faq-q { font-size: 15.5px; padding: 18px 2px; gap: 14px; }
+  .faq-q-icon { width: 24px; height: 24px; font-size: 16px; }
+  .faq-a { font-size: 14px; padding: 0 2px 20px; }
 }

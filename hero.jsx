@@ -199,9 +199,9 @@ function Hero({ variant }) {
             без отправки в облако.
           </p>
           <div className="hero-actions">
-            <a className="btn btn-primary" href={window.PARROT_DOWNLOAD || "#"}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.6 2.13-3.85 2.22-3.9-1.21-1.77-3.1-2.01-3.77-2.04-1.6-.16-3.13.95-3.95.95-.83 0-2.08-.92-3.42-.9-1.76.03-3.38 1.02-4.29 2.6-1.83 3.17-.47 7.87 1.32 10.45.87 1.26 1.9 2.68 3.25 2.63 1.31-.05 1.8-.85 3.39-.85 1.58 0 2.03.85 3.41.82 1.41-.02 2.3-1.28 3.16-2.55.99-1.46 1.4-2.87 1.42-2.94-.03-.01-2.72-1.04-2.74-4.14zM13.97 4.86c.72-.87 1.2-2.08 1.07-3.28-1.03.04-2.28.69-3.02 1.56-.66.77-1.24 2.01-1.09 3.19 1.15.09 2.32-.58 3.04-1.47z"/></svg>
-              Скачать для macOS
+            <a className="btn btn-primary" href="#install">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              Установить через Терминал
             </a>
             <a className="btn btn-ghost" href="#how">
               Как это работает
@@ -210,10 +210,10 @@ function Hero({ variant }) {
           </div>
           <div className="hero-meta">
             <span className="dot-mono">●</span>
-            Для Mac с Apple Silicon: M1, M2, M3 или новее.
+            Для Mac с Apple Silicon: M1, M2, M3 или новее. macOS 12+.
           </div>
           <div className="hero-install-hint">
-            Или установите <a href="#install">одной командой в Terminal</a> - без предупреждений macOS.
+            Одна команда — и Parrot установится сам. <a href="#faq">Никогда не открывали Терминал?</a>
           </div>
         </div>
 
