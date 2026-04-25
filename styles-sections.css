@@ -639,7 +639,7 @@
 .install-help a { color: var(--accent); font-weight: 500; }
 .install-help a:hover { text-decoration: underline; }
 
-/* Install — narrower screens */
+/* Install - narrower screens */
 @media (max-width: 1080px) {
   .install-tab { padding: 24px 24px 22px; }
 }

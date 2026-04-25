@@ -1,4 +1,4 @@
-/* Main app — assembles everything, tweaks panel, edit-mode host protocol */
+/* Main app - assembles everything, tweaks panel, edit-mode host protocol */
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accentTheme": "rainbow",

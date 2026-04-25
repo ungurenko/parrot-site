@@ -69,7 +69,7 @@ function AppMockup({ variant }) {
 
   const url = "https://youtube.com/watch?v=parrot-demo-4k";
   const lines = [
-    "Короче, главное в интервью — не перебивать.",
+    "Короче, главное в интервью - не перебивать.",
     "Человек должен договорить мысль до конца,",
     "и только потом ты задаёшь следующий вопрос."
   ];
@@ -213,7 +213,7 @@ function Hero({ variant }) {
             Для Mac с Apple Silicon: M1, M2, M3 или новее. macOS 12+.
           </div>
           <div className="hero-install-hint">
-            Одна команда — и Parrot установится сам. <a href="#faq">Никогда не открывали Терминал?</a>
+            Одна команда - и Parrot установится сам. <a href="#faq">Никогда не открывали Терминал?</a>
           </div>
         </div>
 
