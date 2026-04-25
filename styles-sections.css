@@ -639,9 +639,98 @@
 .install-help a { color: var(--accent); font-weight: 500; }
 .install-help a:hover { text-decoration: underline; }
 
+/* Install - manual download fallback */
+.install-fallback {
+  background: #fff; border: 1px solid var(--line-strong); border-radius: 16px;
+  overflow: hidden;
+}
+.install-fallback[open] { border-color: var(--line-strong); }
+.install-fallback-summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 18px 24px;
+  font-size: 14.5px; font-weight: 500; color: var(--ink);
+  transition: color .15s ease;
+}
+.install-fallback-summary::-webkit-details-marker { display: none; }
+.install-fallback-summary:hover { color: var(--accent); }
+.install-fallback-summary-text { letter-spacing: -0.005em; }
+.install-fallback-icon {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1; font-weight: 400;
+  transition: transform .2s ease, background .2s ease;
+}
+.install-fallback[open] .install-fallback-summary { color: var(--accent); }
+.install-fallback[open] .install-fallback-icon {
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.install-fallback-body {
+  padding: 4px 24px 24px; border-top: 1px dashed var(--line-strong);
+  margin-top: 0;
+}
+.install-fallback-lead {
+  font-size: 13.5px; line-height: 1.55; color: var(--ink-soft);
+  margin: 18px 0 18px;
+}
+.install-fallback-cta {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  background: var(--ink); color: #fff;
+  padding: 12px 18px; border-radius: 10px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.02em;
+  text-decoration: none; font-weight: 500;
+  transition: opacity 0.15s;
+}
+.install-fallback-cta:hover { opacity: 0.86; text-decoration: none; }
+.install-fallback-cta-meta {
+  font-size: 11px; letter-spacing: 0.06em; opacity: 0.7;
+  text-transform: uppercase;
+}
+.install-fallback-steps {
+  list-style: none; counter-reset: fbstep;
+  padding: 0; margin: 24px 0 0;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.install-fallback-steps > li {
+  counter-increment: fbstep;
+  position: relative; padding-left: 38px;
+}
+.install-fallback-steps > li::before {
+  content: counter(fbstep);
+  position: absolute; left: 0; top: 0;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ink); color: #fff;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+}
+.install-fallback-step-title {
+  font-weight: 600; font-size: 14.5px; color: var(--ink);
+  margin-bottom: 4px; line-height: 1.35;
+}
+.install-fallback-steps p {
+  font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin: 0;
+}
+.install-fallback-steps p b { color: var(--ink); font-weight: 600; }
+.install-fallback-steps code {
+  font-family: var(--font-mono); font-size: 12.5px;
+  background: var(--bg-warm); padding: 1px 6px; border-radius: 5px;
+  color: var(--ink);
+}
+.install-fallback-note {
+  margin: 22px 0 0; padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+  font-size: 12.5px; line-height: 1.5; color: var(--ink-mute);
+}
+
 /* Install - narrower screens */
 @media (max-width: 1080px) {
   .install-tab { padding: 24px 24px 22px; }
+  .install-fallback-summary { padding: 16px 18px; font-size: 14px; }
+  .install-fallback-body { padding: 4px 18px 20px; }
+  .install-fallback-cta { width: 100%; justify-content: center; }
 }
 
 /* ---- FAQ ---- */

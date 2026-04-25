@@ -1175,6 +1175,92 @@ section { padding: 112px 0; position: relative; }
 .install-help a { color: var(--accent); font-weight: 500; }
 .install-help a:hover { text-decoration: underline; }
 
+/* Install - manual download fallback */
+.install-fallback {
+  background: #fff; border: 1px solid var(--line-strong); border-radius: 16px;
+  overflow: hidden;
+}
+.install-fallback[open] { border-color: var(--line-strong); }
+.install-fallback-summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 18px 24px;
+  font-size: 14.5px; font-weight: 500; color: var(--ink);
+  transition: color .15s ease;
+}
+.install-fallback-summary::-webkit-details-marker { display: none; }
+.install-fallback-summary:hover { color: var(--accent); }
+.install-fallback-summary-text { letter-spacing: -0.005em; }
+.install-fallback-icon {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1; font-weight: 400;
+  transition: transform .2s ease, background .2s ease;
+}
+.install-fallback[open] .install-fallback-summary { color: var(--accent); }
+.install-fallback[open] .install-fallback-icon {
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.install-fallback-body {
+  padding: 4px 24px 24px; border-top: 1px dashed var(--line-strong);
+  margin-top: 0;
+}
+.install-fallback-lead {
+  font-size: 13.5px; line-height: 1.55; color: var(--ink-soft);
+  margin: 18px 0 18px;
+}
+.install-fallback-cta {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  background: var(--ink); color: #fff;
+  padding: 12px 18px; border-radius: 10px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.02em;
+  text-decoration: none; font-weight: 500;
+  transition: opacity 0.15s;
+}
+.install-fallback-cta:hover { opacity: 0.86; text-decoration: none; }
+.install-fallback-cta-meta {
+  font-size: 11px; letter-spacing: 0.06em; opacity: 0.7;
+  text-transform: uppercase;
+}
+.install-fallback-steps {
+  list-style: none; counter-reset: fbstep;
+  padding: 0; margin: 24px 0 0;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.install-fallback-steps > li {
+  counter-increment: fbstep;
+  position: relative; padding-left: 38px;
+}
+.install-fallback-steps > li::before {
+  content: counter(fbstep);
+  position: absolute; left: 0; top: 0;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ink); color: #fff;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+}
+.install-fallback-step-title {
+  font-weight: 600; font-size: 14.5px; color: var(--ink);
+  margin-bottom: 4px; line-height: 1.35;
+}
+.install-fallback-steps p {
+  font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin: 0;
+}
+.install-fallback-steps p b { color: var(--ink); font-weight: 600; }
+.install-fallback-steps code {
+  font-family: var(--font-mono); font-size: 12.5px;
+  background: var(--bg-warm); padding: 1px 6px; border-radius: 5px;
+  color: var(--ink);
+}
+.install-fallback-note {
+  margin: 22px 0 0; padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+  font-size: 12.5px; line-height: 1.5; color: var(--ink-mute);
+}
+
 /* ---- FAQ ---- */
 .sec-faq { padding: 96px 0 104px; }
 .sec-faq-lead {
@@ -1311,6 +1397,9 @@ section { padding: 112px 0; position: relative; }
   .feature-grid { grid-template-columns: 1fr; }
   .sec-head { grid-template-columns: 1fr; gap: 24px; }
   .install-tab { padding: 24px 24px 22px; }
+  .install-fallback-summary { padding: 16px 18px; font-size: 14px; }
+  .install-fallback-body { padding: 4px 18px 20px; }
+  .install-fallback-cta { width: 100%; justify-content: center; }
 }
 /* ---- Models carousel (mobile / tablet) ---- */
 @media (max-width: 780px) {
@@ -2027,6 +2116,13 @@ function FAQ() {
       </>
     },
     {
+      q: "Нужно ли что-то ставить заранее (Xcode, Homebrew, git)?",
+      a: <>
+        <p>Нет. Установочная команда использует только <code>curl</code> и <code>tar</code> - они уже встроены в macOS из коробки. Никаких Xcode Command Line Tools, Homebrew, git и прав администратора не нужно.</p>
+        <p>Если macOS вдруг покажет окно «The xcrun command requires the command line developer tools» - это не от установщика Parrot. Установщик ничего из этого не вызывает; такое окно можно смело отменять.</p>
+      </>
+    },
+    {
       q: "Безопасно ли вставлять команду из интернета?",
       a: <>
         <p>Скрипт установки <code>install.sh</code> открыт на GitHub - его можно прочитать построчно перед запуском.</p>
@@ -2085,7 +2181,7 @@ function FAQ() {
       <div className="container">
         <div className="eyebrow"><span className="dot" /> Вопрос - ответ</div>
         <h2 className="section-kicker">Если что-то <em>смущает</em> - здесь ответы.</h2>
-        <p className="sec-faq-lead">Восемь самых частых сомнений и ошибок. Если не нашли своё - напишите в <a href="https://github.com/ungurenko/parrot/issues" target="_blank" rel="noopener">issues на GitHub</a>.</p>
+        <p className="sec-faq-lead">Самые частые сомнения и ошибки. Если не нашли своё - напишите в <a href="https://github.com/ungurenko/parrot/issues" target="_blank" rel="noopener">issues на GitHub</a>.</p>
 
         <div className="faq-list">
           {items.map((item, i) => (
@@ -2132,11 +2228,11 @@ function FinalCTA() {
             Нужен Apple Silicon.
           </p>
 
-          <div className="install-tabs install-tabs--single">
+          <div className="install-tabs">
             <div className="install-tab install-tab--primary">
               <div className="install-tab-head">
                 <h3>⌨ Установка в Терминале</h3>
-                <span className="install-tab-badge">Единственный способ</span>
+                <span className="install-tab-badge">Рекомендуем</span>
               </div>
               <p>Одна команда - Parrot скачается, установится и откроется сам. macOS не задаст ни одного вопроса.</p>
               <div className="install-code" onClick={handleCopy}>
@@ -2195,6 +2291,51 @@ function FinalCTA() {
                 Что-то пошло не так? <a href="#faq">Ответы на частые вопросы →</a>
               </div>
             </div>
+
+            <details className="install-fallback">
+              <summary className="install-fallback-summary">
+                <span className="install-fallback-summary-text">📦 Не хочу в Терминал - скачать вручную</span>
+                <span className="install-fallback-icon" aria-hidden="true">+</span>
+              </summary>
+              <div className="install-fallback-body">
+                <p className="install-fallback-lead">
+                  Тот же дистрибутив, но в виде архива. Дольше и потребует разрешить запуск в настройках безопасности - Parrot не подписан в Apple, потому что мы раздаём его бесплатно.
+                </p>
+
+                <a className="install-fallback-cta"
+                   href="https://github.com/ungurenko/parrot/releases/latest/download/Parrot.app.tar.gz">
+                  ⬇ Скачать Parrot.app.tar.gz <span className="install-fallback-cta-meta">~72 МБ</span>
+                </a>
+
+                <ol className="install-fallback-steps">
+                  <li>
+                    <div className="install-fallback-step-title">Распакуйте архив</div>
+                    <p>Дважды кликните по скачанному <code>Parrot.app.tar.gz</code> в Finder - macOS сама распакует его в <code>Parrot.app</code>.</p>
+                  </li>
+                  <li>
+                    <div className="install-fallback-step-title">Перенесите Parrot в «Программы»</div>
+                    <p>Перетащите <code>Parrot.app</code> из папки «Загрузки» в папку «Программы».</p>
+                  </li>
+                  <li>
+                    <div className="install-fallback-step-title">Первый запуск - через правый клик</div>
+                    <p>В папке «Программы» нажмите правой кнопкой по Parrot → <b>«Открыть»</b>. macOS спросит подтверждение - нажмите <b>«Открыть»</b> ещё раз.</p>
+                    <p className="install-step-hint">Двойной клик в первый раз не сработает: macOS заблокирует неподписанное приложение. Правый клик → «Открыть» - официальный способ обойти это, безопасно.</p>
+                  </li>
+                  <li>
+                    <div className="install-fallback-step-title">Если кнопки «Открыть» нет в диалоге</div>
+                    <p>Откройте <b>«Системные настройки» → «Конфиденциальность и безопасность»</b>. Прокрутите вниз - будет сообщение, что Parrot заблокирован. Нажмите <b>«Открыть всё равно»</b> (на macOS Monterey и Ventura кнопка называется <b>«Подтвердить»</b>) и введите пароль Mac.</p>
+                  </li>
+                  <li>
+                    <div className="install-fallback-step-title">Готово</div>
+                    <p>Parrot теперь в Launchpad и в «Программах». Дальнейшие запуски - обычным двойным кликом.</p>
+                  </li>
+                </ol>
+
+                <p className="install-fallback-note">
+                  Обновляться придётся так же - скачать новый архив и заменить старый Parrot.app. Через Терминал обновление одной командой.
+                </p>
+              </div>
+            </details>
           </div>
 
           <span className="cta-meta">Apple Silicon · macOS 12+</span>
